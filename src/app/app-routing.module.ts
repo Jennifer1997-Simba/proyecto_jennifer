@@ -9,7 +9,11 @@ import { PagesRoutingModule } from './pages/pages-routing.module';
 
 
 const routes:Routes = [ // routes se importa de @angularRoutes
+{path:'login', component: LoginComponent},//cualquier
+{path:'register', component: RegisterComponent},//cualquier
 {path:'**', component: NopagesfoundComponent},//cualquier
+
+
 ];
 
 
@@ -17,7 +21,7 @@ const routes:Routes = [ // routes se importa de @angularRoutes
   declarations: [],
   imports: [RouterModule.forRoot(routes),
     PagesRoutingModule,
-    
+
 
 
   ],
