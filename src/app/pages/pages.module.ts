@@ -4,8 +4,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './product/product.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
 import { PagesComponent } from './pages.component';
-import { AppRoutingModule } from '../app-routing.module';
+
 import { SharedModule } from '../shared/shared.module';
+import { PagesRoutingModule } from './pages-routing.module';
+import { LoginComponent } from '../auth/login/login.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -14,22 +17,26 @@ import { SharedModule } from '../shared/shared.module';
     DashboardComponent, //sale error porque se los debe importar
     ProductComponent,
     CatalogueComponent,
-    PagesComponent,
+    LoginComponent,
+    PagesComponent
+
   ],
 
   exports: [ //para que se usen fuera de este modulo
 DashboardComponent,
 ProductComponent,
 CatalogueComponent,
-PagesComponent,
+LoginComponent,
+PagesComponent
+
 ],
 
   imports: [
 
     CommonModule,
-    AppRoutingModule,
-   PagesModule,
-   SharedModule
+   SharedModule,
+   PagesRoutingModule,
+   RouterModule
 
   ],
 })

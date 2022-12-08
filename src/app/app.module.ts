@@ -14,13 +14,15 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
 import { AppRoutingModule } from './app-routing.module';
 
 import { NopagesfoundComponent } from './nopagesfound/nopagesfound.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     //DashboardComponent,
     NopagesfoundComponent,
-    LoginComponent,
+    // LoginComponent,
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
@@ -34,6 +36,9 @@ import { NopagesfoundComponent } from './nopagesfound/nopagesfound.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PagesModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
