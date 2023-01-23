@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+import { ProductHttpService } from '../../service/product-http.service';
+import { ProductModel, UpdateProductDto } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -8,84 +10,68 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private httpclient:HttpClient) { }
+  products: ProductModel[] = [];
+  selectedProduct:UpdateProductDto = {};
 
-  ngOnInit(): void {
-    //this.getProducts();
-    this.getProduct();
-    //this.createProduct();
-    //this.updateProduct();
-    //this.deleteProduct();
-
-  }
-
-  getProducts(){
-    this.httpclient.get("https://api.escuelajs.co/api/v1/products").subscribe (
-      response => {
-        console.log(response);
-      }
-    ) ;
-  }
-
-  getProduct(){
-    this.httpclient.get("https://api.escuelajs.co/api/v1/products").subscribe (
-      response => {
-        console.log(response);
-      }
-    );
-  }
-
-  createProduct(){
-   const data = {
-
-      title:'Jennifer Simba',
-      price:50,
-      description:'Instituto yavirac',
-      images:[],
-      categoryId:1,
-
-    }
-    const url="https://api.escuelajs.co/api/v1/products"
-    this.httpclient.post(url,data).subscribe (
-      response => {
-        console.log(response);
-      }
-    );
-
-
-    //taller con put señalar el mnombre y revisas en la url
-  }
-
-
-  updateProduct(){
-    const data = {
-
-       title:'Jennifer Rivera',
-       price:3,
-       description:'Trabajo',
-
-
-     }
-     const url="https://api.escuelajs.co/api/v1/products/65"
-     this.httpclient.put(url,data).subscribe (
-       response => {
-         console.log(response);
-       }
-     );
-
-
-     //taller con put señalar el mnombre y revisas en la url
+  constructor(private productHttpService:ProductHttpService) {
    }
 
-
-   deleteProduct(){
-    const url="https://api.escuelajs.co/api/v1/products/65"
-    this.httpclient.delete(url).subscribe (
-      response => {
-        console.log(response);
-      }
-    );
+  ngOnInit(): void {
+    this.getProducts();
+    //this.getProduct();
+    //this.createProduct();
+    // this.updateProduct();
+    //this.deleteProduct();
   }
 
+    getProducts() {
+      this.productHttpService.getAll().subscribe(
+        response => {
+          this.products = response;
+          console.log(response);
+        });
+    }
+    getProduct() {
+      this.productHttpService.getOne(2).subscribe(
+        response => {
+        console.log(response);
+      });
+    }
 
+    createProduct() {
+      const data = {
+        title: 'Computadora Itel core i7',
+        price: 650,
+        description: 'Electrodomesticos / Erick Guevara',
+        images: [
+          'https://m.media-amazon.com/images/I/51A+xXT0yiL._AC_SY580_.jpg',
+        ],
+        categoryId: 1,
+      };
+      this.productHttpService.store(data).subscribe(
+        response => {
+        console.log(response);
+      });
+    }
+    editProduct(product: ProductModel){
+      this.selectedProduct = product;
+    }
+    updateProduct() {
+      const data = {
+        title: 'Computadora Itel core i10',
+        price: 1150,
+        description: 'Electrodomesticos / Erick Guevara',
+      };
+      this.productHttpService.update(1, data).subscribe(
+        response => {
+        console.log(response);
+      });
+    }
+    deleteProduct(id: ProductModel['id']) {
+      this.productHttpService.destroy(id).subscribe(
+        response => {
+          this.products = this.products.filter(product => product.id != id );
+        console.log(response);
+      });
+    }
 }
