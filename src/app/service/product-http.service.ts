@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 
 import { map, Observable } from 'rxjs';
-import {CreateProductDto, ProductModel, UpdateProductDto } from '../models/product.model';
+import {CreateProductDto, ProductModel, UpdateProductDto } from '../entities/product.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({

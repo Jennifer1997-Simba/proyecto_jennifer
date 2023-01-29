@@ -1,31 +1,25 @@
 import { NgModule } from '@angular/core';
-import { RouterModule,Routes} from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { NopagesfoundComponent } from './nopagesfound/nopagesfound.component';
+import { RouterModule, Routes } from '@angular/router';
+
 import { PagesRoutingModule } from './pages/pages-routing.module';
 
+import { NopagesfoundComponent } from './nopagesfound/nopagesfound.component';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 
+const routes:Routes = [
 
+  {path:'', redirectTo:'/dashboard', pathMatch:'full'},
+  {path:'**', component:NopagesfoundComponent}
 
-const routes:Routes = [ // routes se importa de @angularRoutes
-{path:'login', component: LoginComponent},//cualquier
-{path:'register', component: RegisterComponent},//cualquier
-{path:'**', component: NopagesfoundComponent},//cualquier
-
-
-];
-
-
+]
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes),
+  imports: [
+
+    RouterModule.forRoot(routes),
     PagesRoutingModule,
-
-
-
-  ],
+    AuthRoutingModule
+   ],
   exports:[RouterModule]
-
 })
 export class AppRoutingModule { }

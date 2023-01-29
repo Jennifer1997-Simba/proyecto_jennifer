@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
 import { ProductHttpService } from '../../service/product-http.service';
-import { ProductModel, UpdateProductDto } from 'src/app/models/product.model';
+import { ProductModel, UpdateProductDto } from 'src/app/entities/product.model';
 
 @Component({
   selector: 'app-product',
@@ -40,9 +40,9 @@ export class ProductComponent implements OnInit {
 
     createProduct() {
       const data = {
-        title: 'Computadora Itel core i7',
-        price: 650,
-        description: 'Electrodomesticos / Erick Guevara',
+        title: 'Computadora',
+        price: 400,
+        description: 'Computadoras / Erick Guevara',
         images: [
           'https://m.media-amazon.com/images/I/51A+xXT0yiL._AC_SY580_.jpg',
         ],
